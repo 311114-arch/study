@@ -29,7 +29,7 @@ const reminderMessages = [
   '你今天的努力，會在花園裡發芽。'
 ];
 
-const state = {
+window.state = window.state || {
   users: {},
   currentUser: null,
   currentPlant: null,
