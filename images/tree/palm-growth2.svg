@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 二階成長期 -->
+  <!-- 树干 -->
+  <path d="M 50 90 Q 48 60 50 40" stroke="#8d6e63" stroke-width="7" fill="none"/>
+  <!-- 棕櫚葉（many） -->
+  <path d="M 50 40 L 35 15" stroke="#7cb342" stroke-width="3" fill="none"/>
+  <path d="M 50 40 L 50 10" stroke="#7cb342" stroke-width="3" fill="none"/>
+  <path d="M 50 40 L 65 15" stroke="#7cb342" stroke-width="3" fill="none"/>
+  <path d="M 50 45 L 32 25" stroke="#8bc34a" stroke-width="2" fill="none"/>
+  <path d="M 50 45 L 68 25" stroke="#8bc34a" stroke-width="2" fill="none"/>
+  <path d="M 50 50 L 40 35" stroke="#9ccc65" stroke-width="2" fill="none"/>
+  <path d="M 50 50 L 60 35" stroke="#9ccc65" stroke-width="2" fill="none"/>
+  <!-- 土壤 -->
+  <ellipse cx="50" cy="92" rx="20" ry="6" fill="#8d6e63" opacity="0.3"/>
+</svg>

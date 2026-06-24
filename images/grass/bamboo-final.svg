@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 最終型態 -->
+  <path d="M 50 90 Q 48 50 50 30" stroke="#1b5e20" stroke-width="6" fill="none"/>
+  <!-- 多個竹節 -->
+  <line x1="44" y1="75" x2="56" y2="75" stroke="#33691e" stroke-width="2.5"/>
+  <line x1="44" y1="60" x2="56" y2="60" stroke="#33691e" stroke-width="2.5"/>
+  <line x1="44" y1="45" x2="56" y2="45" stroke="#33691e" stroke-width="2.5"/>
+  <line x1="44" y1="30" x2="56" y2="30" stroke="#33691e" stroke-width="2.5"/>
+  <!-- 茂盛的葉 -->
+  <path d="M 50 70 L 30 50" stroke="#7cb342" stroke-width="3" fill="none"/>
+  <path d="M 50 70 L 70 50" stroke="#7cb342" stroke-width="3" fill="none"/>
+  <path d="M 50 56 L 32 40" stroke="#8bc34a" stroke-width="3" fill="none"/>
+  <path d="M 50 56 L 68 40" stroke="#8bc34a" stroke-width="3" fill="none"/>
+  <path d="M 50 42 L 35 28" stroke="#9ccc65" stroke-width="2" fill="none"/>
+  <path d="M 50 42 L 65 28" stroke="#9ccc65" stroke-width="2" fill="none"/>
+  <path d="M 50 28 L 40 18" stroke="#aed581" stroke-width="2" fill="none"/>
+  <path d="M 50 28 L 60 18" stroke="#aed581" stroke-width="2" fill="none"/>
+  <ellipse cx="50" cy="92" rx="20" ry="6" fill="#8d6e63" opacity="0.3"/>
+</svg>

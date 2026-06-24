@@ -1,0 +1,9 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 一階成長期 - 小樹 -->
+  <!-- 树干 -->
+  <rect x="46" y="55" width="8" height="35" fill="#8d6e63"/>
+  <!-- 树冠（圓形） -->
+  <circle cx="50" cy="40" r="18" fill="#4caf50"/>
+  <!-- 土壤 -->
+  <ellipse cx="50" cy="92" rx="20" ry="6" fill="#8d6e63" opacity="0.3"/>
+</svg>

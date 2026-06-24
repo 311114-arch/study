@@ -1,0 +1,7 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 幼苗 -->
+  <ellipse cx="50" cy="70" rx="8" ry="15" fill="#7cb342" opacity="0.7"/>
+  <path d="M 45 70 Q 40 50 45 40" stroke="#7cb342" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 55 70 Q 60 50 55 40" stroke="#7cb342" stroke-width="3" fill="none" opacity="0.7"/>
+  <ellipse cx="50" cy="85" rx="20" ry="8" fill="#8d6e63" opacity="0.3"/>
+</svg>

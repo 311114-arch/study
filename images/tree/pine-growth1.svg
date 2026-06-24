@@ -1,0 +1,9 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 一階成長期 -->
+  <!-- 树干 -->
+  <rect x="46" y="60" width="8" height="30" fill="#8d6e63"/>
+  <!-- 树冠 -->
+  <polygon points="50,30 35,50 45,50 40,65 55,65 50,50 60,50" fill="#2e7d32"/>
+  <!-- 土壤 -->
+  <ellipse cx="50" cy="92" rx="20" ry="6" fill="#8d6e63" opacity="0.3"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 最終型態 - 完全開放 -->
+  <!-- 莖 -->
+  <path d="M 50 90 Q 48 50 50 30" stroke="#7cb342" stroke-width="5" fill="none"/>
+  <!-- 花瓣（外層）-->
+  <ellipse cx="50" cy="20" rx="7" ry="12" fill="#ff1744"/>
+  <ellipse cx="38" cy="26" rx="8" ry="11" fill="#ff1744" transform="rotate(-60 38 26)"/>
+  <ellipse cx="62" cy="26" rx="8" ry="11" fill="#ff1744" transform="rotate(60 62 26)"/>
+  <!-- 花瓣（內層）-->
+  <ellipse cx="50" cy="22" rx="5" ry="8" fill="#ff5252"/>
+  <ellipse cx="40" cy="28" rx="6" ry="10" fill="#ff5252" transform="rotate(-60 40 28)"/>
+  <ellipse cx="60" cy="28" rx="6" ry="10" fill="#ff5252" transform="rotate(60 60 28)"/>
+  <!-- 花芯 -->
+  <circle cx="50" cy="25" r="3" fill="#ffeb3b"/>
+  <!-- 葉子 -->
+  <path d="M 45 55 Q 25 50 20 70" stroke="#7cb342" stroke-width="3" fill="none"/>
+  <path d="M 55 55 Q 75 50 80 70" stroke="#7cb342" stroke-width="3" fill="none"/>
+  <!-- 土壤 -->
+  <ellipse cx="50" cy="92" rx="20" ry="6" fill="#8d6e63" opacity="0.3"/>
+</svg>

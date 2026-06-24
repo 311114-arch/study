@@ -1,0 +1,16 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 二階成長期 -->
+  <path d="M 50 90 Q 48 55 50 35" stroke="#33691e" stroke-width="5" fill="none"/>
+  <!-- 多個竹節 -->
+  <line x1="45" y1="75" x2="55" y2="75" stroke="#558b2f" stroke-width="2"/>
+  <line x1="45" y1="60" x2="55" y2="60" stroke="#558b2f" stroke-width="2"/>
+  <line x1="45" y1="45" x2="55" y2="45" stroke="#558b2f" stroke-width="2"/>
+  <!-- 多層葉 -->
+  <path d="M 50 70 L 32 55" stroke="#7cb342" stroke-width="3" fill="none"/>
+  <path d="M 50 70 L 68 55" stroke="#7cb342" stroke-width="3" fill="none"/>
+  <path d="M 50 57 L 35 45" stroke="#8bc34a" stroke-width="2" fill="none"/>
+  <path d="M 50 57 L 65 45" stroke="#8bc34a" stroke-width="2" fill="none"/>
+  <path d="M 50 42 L 38 32" stroke="#9ccc65" stroke-width="2" fill="none"/>
+  <path d="M 50 42 L 62 32" stroke="#9ccc65" stroke-width="2" fill="none"/>
+  <ellipse cx="50" cy="92" rx="20" ry="6" fill="#8d6e63" opacity="0.3"/>
+</svg>

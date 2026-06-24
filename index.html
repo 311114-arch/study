@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>讀書計時花園</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <section id="login-page" class="page active">
+      <div class="card auth-card">
+        <h1>讀書計時花園</h1>
+        <div id="login-form">
+          <label>帳號
+            <input id="login-user" type="text" placeholder="輸入帳號" autocomplete="username" />
+          </label>
+          <label>密碼
+            <input id="login-pass" type="password" placeholder="輸入密碼" autocomplete="current-password" />
+          </label>
+          <button id="login-btn" class="primary-btn">登入</button>
+          <p id="login-error" class="message"></p>
+          <p class="small">沒有帳號？<a href="#" id="show-register">點此註冊</a></p>
+        </div>
+
+        <div id="register-form" class="hidden">
+          <label>帳號
+            <input id="register-user" type="text" placeholder="輸入帳號" autocomplete="username" />
+          </label>
+          <label>密碼
+            <input id="register-pass" type="password" placeholder="輸入密碼" autocomplete="new-password" />
+          </label>
+          <button id="register-btn" class="primary-btn">註冊</button>
+          <p id="register-error" class="message"></p>
+          <p class="small">已經有帳號？<a href="#" id="show-login">回到登入</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="main-page" class="page">
+      <div class="top-bar">
+        <div>
+          <span id="welcome-text">歡迎</span>
+          <button id="logout-btn" class="ghost-btn">登出</button>
+        </div>
+        <div class="status-chip" id="plant-stage-label"></div>
+      </div>
+
+      <div class="grassland-card">
+        <div class="grassland">
+          <div class="grass-layer"></div>
+          <div class="plant-display" id="plant-display"></div>
+          <div class="plant-info">
+            <div id="plant-name"></div>
+            <div id="plant-description"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timer-panel">
+        <div class="timer-card">
+          <div class="timer-value" id="timer-value">00:00:00</div>
+          <div class="timer-buttons">
+            <button id="start-btn" class="primary-btn">開始</button>
+            <button id="pause-btn" class="secondary-btn">暫停</button>
+            <button id="reset-btn" class="secondary-btn">重置</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="smart-panel">
+        <div class="smart-card">
+          <div class="smart-card-head">
+            <h3>讀書提醒與小語</h3>
+            <span class="pill">每日提醒</span>
+          </div>
+          <div class="reminder-box">
+            <div id="reminder-text" class="reminder-text">今日先讀 20 分鐘，再種下一株植物。</div>
+            <button id="next-reminder-btn" class="secondary-btn reminder-btn">下一句</button>
+          </div>
+          <p class="smart-copy">每次種下植物時，系統會把植物種類同步到 Google Sheets，方便你留存成長紀錄。</p>
+          <label>Apps Script Web App URL
+            <input id="gas-url" type="url" placeholder="https://script.google.com/macros/s/.../exec" />
+          </label>
+          <label>自動填入內容
+            <textarea id="api-note" rows="3" placeholder="這裡會顯示 API 抓到的內容"></textarea>
+          </label>
+          <div class="smart-actions">
+            <button id="fetch-api-btn" class="secondary-btn">呼叫 API 填入</button>
+            <button id="sync-gas-btn" class="primary-btn">同步到 Sheets</button>
+          </div>
+          <p id="sync-status" class="sync-status">請先填入 GAS URL。</p>
+        </div>
+      </div>
+
+      <button id="garden-btn" class="fab-btn" aria-label="前往花園">
+        <span class="fab-icon">🌼</span>
+        <span>花園</span>
+      </button>
+    </section>
+
+    <section id="garden-page" class="page">
+      <div class="top-bar">
+        <div>
+          <h2>我的花園</h2>
+        </div>
+        <div class="status-chip" id="garden-summary-label"></div>
+      </div>
+      <div class="garden-board">
+        <div class="garden-grid" id="garden-grid"></div>
+      </div>
+      <button id="home-btn" class="fab-btn garden-home-btn" aria-label="返回主頁">
+        <span class="fab-icon">⏱️</span>
+        <span>回主頁</span>
+      </button>
+    </section>
+
+    <div id="toast" class="toast hidden"></div>
+    <div id="modal-overlay" class="modal-overlay hidden">
+      <div class="modal-card">
+        <h3 id="modal-title">本週花園結算</h3>
+        <p id="modal-message"></p>
+        <button id="modal-confirm-btn" class="primary-btn">確認</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="sync-helpers.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

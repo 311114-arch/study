@@ -1,0 +1,501 @@
+:root {
+  --bg: #e9f7ff;
+  --card: #ffffff;
+  --text: #223344;
+  --muted: #6b7a8f;
+  --primary: #4a98ff;
+  --primary-dark: #2f6bf2;
+  --success: #58b368;
+  --accent: #ffd066;
+  --shadow: 0 20px 45px rgba(34, 51, 68, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Inter, system-ui, sans-serif;
+  background: radial-gradient(circle at top, #d8f0ff 0%, #cfe9ff 35%, #f3f8ff 100%);
+  color: var(--text);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+#app {
+  width: min(1120px, 100%);
+  position: relative;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.auth-card,
+.grassland-card,
+.timer-card,
+.modal-card,
+.garden-board {
+  background: var(--card);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.auth-card {
+  max-width: 420px;
+  margin: auto;
+  padding: 32px;
+  text-align: center;
+}
+
+.auth-card h1 {
+  margin: 0 0 24px;
+  font-size: 2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid #d6e2f0;
+  margin-top: 8px;
+  font-size: 1rem;
+}
+
+button {
+  border: none;
+  border-radius: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  margin-top: 8px;
+}
+
+.secondary-btn {
+  padding: 12px 16px;
+  background: #f4f8ff;
+  color: var(--text);
+  border: 1px solid #d6e2f0;
+}
+
+.ghost-btn {
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--primary-dark);
+}
+
+.small {
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+.small a {
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.message {
+  min-height: 22px;
+  margin: 0;
+  color: #d73a49;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.top-bar div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-chip {
+  padding: 10px 16px;
+  background: #ffffffcc;
+  border-radius: 999px;
+  border: 1px solid #dde9f8;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.grassland-card {
+  padding: 0;
+  margin-bottom: 22px;
+  background: none;
+  box-shadow: none;
+}
+
+.grassland {
+  position: relative;
+  min-height: 360px;
+  border-radius: 32px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.grass-layer {
+  position: absolute;
+  inset: 0;
+  background-image: none;
+}
+
+.plant-display {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.plant-display .plant-icon {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  display: block;
+  transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+}
+
+/* 不同成長階段的視覺效果 */
+.plant-display .plant-icon.stage-seedling {
+  width: 80px;
+  height: 80px;
+  opacity: 0.7;
+}
+
+.plant-display .plant-icon.stage-growth-1 {
+  width: 140px;
+  height: 140px;
+  opacity: 0.85;
+}
+
+.plant-display .plant-icon.stage-growth-2 {
+  width: 168px;
+  height: 168px;
+  opacity: 0.95;
+}
+
+.plant-display .plant-icon.stage-final {
+  width: 200px;
+  height: 200px;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px rgba(255, 200, 100, 0.6));
+}
+
+.plant-info {
+  margin-top: 24px;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.plant-info div {
+  margin: 6px 0;
+}
+
+.timer-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.timer-card {
+  width: min(600px, 100%);
+  padding: 24px;
+  border-radius: 28px;
+  text-align: center;
+}
+
+.timer-value {
+  font-size: 3rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 18px;
+}
+
+.timer-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.smart-panel {
+  margin: 24px auto 0;
+  max-width: 760px;
+}
+
+.smart-card {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  animation: floatCard 5s ease-in-out infinite;
+}
+
+.smart-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.smart-card h3 {
+  margin: 0;
+}
+
+.pill {
+  background: linear-gradient(135deg, var(--accent), #ffb347);
+  color: #5a3200;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.smart-copy {
+  color: var(--muted);
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+textarea {
+  width: 100%;
+  min-height: 94px;
+  border-radius: 16px;
+  border: 1px solid #d6e2f0;
+  padding: 12px 14px;
+  resize: vertical;
+  font-size: 1rem;
+  margin-top: 8px;
+}
+
+.smart-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.smart-actions .secondary-btn,
+.smart-actions .primary-btn {
+  width: auto;
+  flex: 1 1 220px;
+}
+
+.reminder-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #f7fbff, #eef8ff);
+  border: 1px solid #dcecfb;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+.reminder-text {
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.reminder-btn {
+  white-space: nowrap;
+}
+
+.sync-status {
+  min-height: 24px;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.sync-status.success {
+  color: var(--success);
+}
+
+.sync-status.error {
+  color: #d73a49;
+}
+
+.sync-status.loading {
+  color: var(--primary-dark);
+}
+
+.fab-btn {
+  position: fixed;
+  left: 28px;
+  bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #ffbd69, #ff9f68);
+  color: #fff;
+  box-shadow: 0 24px 44px rgba(255, 157, 78, 0.2);
+  border-radius: 24px;
+  font-weight: 700;
+}
+
+.garden-home-btn {
+  background: linear-gradient(135deg, #4a98ff, #2f6bf2);
+}
+
+.fab-icon {
+  font-size: 1.25rem;
+}
+
+.garden-board {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 24px;
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+}
+
+.garden-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 10px;
+  transform: perspective(1200px) rotateX(11deg);
+}
+
+.garden-cell {
+  position: relative;
+  min-height: 80px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #f4f9f2 0%, #e7f2d8 100%);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.75), 0 8px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.garden-cell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.5) 0%, transparent 20%),
+                    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.35) 0%, transparent 18%);
+}
+
+.garden-plant {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  z-index: 2;
+}
+
+.garden-plant img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.garden-plant span {
+  display: block;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #2b4d27;
+  margin-top: 4px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  background: rgba(34, 51, 68, 0.93);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 16px;
+  box-shadow: 0 18px 38px rgba(0,0,0,0.22);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.modal-card {
+  width: min(480px, 100%);
+  padding: 28px;
+  background: white;
+  border-radius: 28px;
+  text-align: center;
+}
+
+.modal-card h3 {
+  margin-top: 0;
+}
+
+.modal-card p {
+  color: var(--muted);
+  margin: 18px 0 26px;
+}
+
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 16px;
+  }
+
+  .garden-grid {
+    gap: 8px;
+  }
+
+  .garden-cell {
+    min-height: 64px;
+  }
+
+  .fab-btn {
+    left: 16px;
+    bottom: 16px;
+  }
+}
