@@ -22,17 +22,6 @@ const plantTypes = {
   ]
 };
 
-const state = {
-  users: {},
-  currentUser: null,
-  currentPlant: null,
-  elapsedSeconds: 0,
-  timer: null,
-  isRunning: false,
-  isHarvesting: false,
-  currentPage: 'login'
-};
-
 const reminderMessages = [
   '今日先讀 20 分鐘，再種下一株植物。',
   '每次小步進步，都會長出一株新的植物。',
