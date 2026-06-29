@@ -7,18 +7,20 @@ function doGet(e) {
 
 function doPost(e) {
   try {
-    Logger.log('=== doPost 被調用 ===');
-    
-    // 解析請求內容 - 支援 sendBeacon 和 fetch 兩種方式
+    // 嘗試多種方式解析 payload
     let payload = {};
     
     if (e.postData && e.postData.contents) {
       try {
         payload = JSON.parse(e.postData.contents);
-        Logger.log('Payload parsed: ' + JSON.stringify(payload));
       } catch (parseError) {
-        Logger.log('JSON parse error: ' + parseError);
+        // JSON parse 失敗，嘗試使用 e.parameter
+        if (e.parameter) {
+          payload = e.parameter;
+        }
       }
+    } else if (e.parameter) {
+      payload = e.parameter;
     }
 
     // 取得或建立試算表
