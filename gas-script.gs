@@ -1,5 +1,4 @@
-// 硬編碼 Google Sheet ID
-const SHEET_ID = '1HR3fNWMxcCELR4FGHuJjQakChB4pmjNQ4e1Pidgc8Ug';
+// Google Sheet 配置
 const SHEET_NAME = 'StudyGarden';
 
 function doGet(e) {
@@ -8,8 +7,9 @@ function doGet(e) {
 
 function getSheetInfo() {
   try {
-    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit';
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    const sheetId = spreadsheet.getId();
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/edit';
     return {
       ok: true,
       sheetUrl: sheetUrl,
@@ -38,7 +38,8 @@ function doPost(e) {
     }
 
     // 取得或建立試算表
-    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    const sheetId = spreadsheet.getId();
     let sheet = spreadsheet.getSheetByName(SHEET_NAME);
     
     if (!sheet) {
@@ -73,7 +74,7 @@ function doPost(e) {
     return createCorsResponse({ 
       ok: true, 
       message: '已寫入 Google Sheets',
-      sheetUrl: 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit'
+      sheetUrl: 'https://docs.google.com/spreadsheets/d/' + sheetId + '/edit'
     });
   } catch (error) {
     Logger.log('Error: ' + error.toString());
