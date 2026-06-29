@@ -302,9 +302,13 @@ function showModal(title, message, onConfirm) {
   };
 }
 
-function setSyncStatus(message, type = 'info') {
+function setSyncStatus(message, type = 'info', sheetUrl = null) {
   if (!elements.syncStatus) return;
-  elements.syncStatus.textContent = message;
+  if (sheetUrl) {
+    elements.syncStatus.innerHTML = `${message} <a href="${sheetUrl}" target="_blank" style="color: #0066cc; text-decoration: underline; margin-left: 8px;">📊 查看 Sheet</a>`;
+  } else {
+    elements.syncStatus.textContent = message;
+  }
   elements.syncStatus.className = `sync-status ${type}`;
 }
 
@@ -388,7 +392,7 @@ async function syncToGoogleSheets(options = {}) {
     }
 
     const result = await response.json().catch(() => null);
-    setSyncStatus(result?.message || '資料已同步到 Google Sheets。', 'success');
+    setSyncStatus(result?.message || '資料已同步到 Google Sheets。', 'success', result?.sheetUrl);
   } catch (error) {
     setSyncStatus(`同步失敗：${error.message}`, 'error');
   }

@@ -1,25 +1,91 @@
+// 硬編碼 Google Sheet ID
+const SHEET_ID = '1HR3fNWMxcCELR4FGHuJjQakChB4pmjNQ4e1Pidgc8Ug';
+const SHEET_NAME = 'StudyGarden';
+
 function doGet(e) {
   return HtmlService.createHtmlOutput('Study Garden GAS is running.');
 }
 
+function getSheetInfo() {
+  try {
+    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit';
+    return {
+      ok: true,
+      sheetUrl: sheetUrl,
+      sheetName: SHEET_NAME
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      message: 'Error accessing sheet: ' + error.toString()
+    };
+  }
+}
+
 function doPost(e) {
   try {
-    const payload = typeof e.postData.contents === 'string' && e.postData.contents
-      ? JSON.parse(e.postData.contents)
-      : {};
+    // 解析請求內容
+    let payload = {};
+    
+    if (e.postData && e.postData.contents) {
+      try {
+        payload = JSON.parse(e.postData.contents);
+      } catch (parseError) {
+        Logger.log('JSON parse error: ' + parseError);
+        return createCorsResponse({ ok: false, message: 'Invalid JSON format' });
+      }
+    }
 
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('StudyGarden') || SpreadsheetApp.getActiveSpreadsheet().insertSheet('StudyGarden');
+    // 取得或建立試算表
+    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    let sheet = spreadsheet.getSheetByName(SHEET_NAME);
+    
+    if (!sheet) {
+      sheet = spreadsheet.insertSheet(SHEET_NAME);
+    }
+
+    // 設置表頭
     const headers = ['timestamp', 'recordDate', 'username', 'plantName', 'plantType', 'stage', 'elapsedSeconds', 'apiSuggestion', 'note', 'reminderText'];
-
+    
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(headers);
     }
 
-    const values = headers.map((key) => payload[key] ?? '');
+    // 寫入數據
+    const timestamp = new Date().toISOString();
+    const values = [
+      timestamp,
+      payload.recordDate || new Date().toISOString().slice(0, 10),
+      payload.username || '',
+      payload.plantName || '',
+      payload.plantType || '',
+      payload.stage || '',
+      payload.elapsedSeconds || 0,
+      payload.apiSuggestion || '',
+      payload.note || '',
+      payload.reminderText || ''
+    ];
+    
     sheet.appendRow(values);
+    Logger.log('Data written successfully: ' + JSON.stringify(values));
 
-    return ContentService.createTextOutput(JSON.stringify({ ok: true, message: '已寫入 Google Sheets' })).setMimeType(ContentService.MimeType.JSON);
+    return createCorsResponse({ 
+      ok: true, 
+      message: '已寫入 Google Sheets',
+      sheetUrl: 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit'
+    });
   } catch (error) {
-    return ContentService.createTextOutput(JSON.stringify({ ok: false, message: error.message })).setMimeType(ContentService.MimeType.JSON);
+    Logger.log('Error: ' + error.toString());
+    return createCorsResponse({ ok: false, message: error.toString() });
   }
+}
+
+function createCorsResponse(data) {
+  return ContentService.createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON)
+    .addHeader('Access-Control-Allow-Origin', '*')
+    .addHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+    .addHeader('Access-Control-Allow-Headers', 'Content-Type, X-CORS-TOKEN')
+    .addHeader('X-Content-Type-Options', 'nosniff');
 }
