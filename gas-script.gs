@@ -5,45 +5,45 @@ function doGet(e) {
   return HtmlService.createHtmlOutput('Study Garden GAS is running.');
 }
 
-function getSheetInfo() {
-  try {
-    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    const sheetId = spreadsheet.getId();
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/edit';
-    return {
-      ok: true,
-      sheetUrl: sheetUrl,
-      sheetName: SHEET_NAME
-    };
-  } catch (error) {
-    return {
-      ok: false,
-      message: 'Error accessing sheet: ' + error.toString()
-    };
-  }
+function doOptions(e) {
+  var output = ContentService.createTextOutput();
+  output.setMimeType(ContentService.MimeType.TEXT);
+  output.append('');
+  output.addHeader('Access-Control-Allow-Origin', '*');
+  output.addHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  output.addHeader('Access-Control-Allow-Headers', 'Content-Type, X-CORS-TOKEN');
+  output.addHeader('Access-Control-Max-Age', '3600');
+  return output;
 }
 
 function doPost(e) {
   try {
+    Logger.log('=== doPost 被調用 ===');
+    Logger.log('Request: ' + JSON.stringify(e));
+    
     // 解析請求內容
     let payload = {};
     
     if (e.postData && e.postData.contents) {
       try {
         payload = JSON.parse(e.postData.contents);
+        Logger.log('Payload parsed: ' + JSON.stringify(payload));
       } catch (parseError) {
         Logger.log('JSON parse error: ' + parseError);
-        return createCorsResponse({ ok: false, message: 'Invalid JSON format' });
+        return createCorsResponse({ ok: false, message: 'Invalid JSON format: ' + parseError });
       }
     }
 
     // 取得或建立試算表
     const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
     const sheetId = spreadsheet.getId();
+    Logger.log('Sheet ID: ' + sheetId);
+    
     let sheet = spreadsheet.getSheetByName(SHEET_NAME);
     
     if (!sheet) {
       sheet = spreadsheet.insertSheet(SHEET_NAME);
+      Logger.log('Created new sheet: ' + SHEET_NAME);
     }
 
     // 設置表頭
@@ -51,6 +51,7 @@ function doPost(e) {
     
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(headers);
+      Logger.log('Headers added');
     }
 
     // 寫入數據
@@ -69,7 +70,7 @@ function doPost(e) {
     ];
     
     sheet.appendRow(values);
-    Logger.log('Data written successfully: ' + JSON.stringify(values));
+    Logger.log('Data written: ' + JSON.stringify(values));
 
     return createCorsResponse({ 
       ok: true, 
@@ -77,8 +78,8 @@ function doPost(e) {
       sheetUrl: 'https://docs.google.com/spreadsheets/d/' + sheetId + '/edit'
     });
   } catch (error) {
-    Logger.log('Error: ' + error.toString());
-    return createCorsResponse({ ok: false, message: error.toString() });
+    Logger.log('Error in doPost: ' + error.toString());
+    return createCorsResponse({ ok: false, message: 'Error: ' + error.toString() });
   }
 }
 
@@ -86,7 +87,9 @@ function createCorsResponse(data) {
   return ContentService.createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON)
     .addHeader('Access-Control-Allow-Origin', '*')
-    .addHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+    .addHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
     .addHeader('Access-Control-Allow-Headers', 'Content-Type, X-CORS-TOKEN')
-    .addHeader('X-Content-Type-Options', 'nosniff');
+    .addHeader('Access-Control-Max-Age', '3600')
+    .addHeader('X-Content-Type-Options', 'nosniff')
+    .addHeader('Vary', 'Origin');
 }
