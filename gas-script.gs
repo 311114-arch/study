@@ -9,7 +9,7 @@ function doPost(e) {
   try {
     Logger.log('=== doPost 被調用 ===');
     
-    // 解析請求內容
+    // 解析請求內容 - 支援 sendBeacon 和 fetch 兩種方式
     let payload = {};
     
     if (e.postData && e.postData.contents) {
@@ -18,7 +18,6 @@ function doPost(e) {
         Logger.log('Payload parsed: ' + JSON.stringify(payload));
       } catch (parseError) {
         Logger.log('JSON parse error: ' + parseError);
-        return createJsonResponse({ ok: false, message: 'Invalid JSON format: ' + parseError });
       }
     }
 
@@ -58,7 +57,7 @@ function doPost(e) {
     ];
     
     sheet.appendRow(values);
-    Logger.log('Data written: ' + JSON.stringify(values));
+    Logger.log('Data written successfully!');
 
     return createJsonResponse({ 
       ok: true, 

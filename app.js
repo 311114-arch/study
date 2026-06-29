@@ -381,18 +381,15 @@ async function syncToGoogleSheets(options = {}) {
   setSyncStatus('正在同步到 Google Sheets…', 'loading');
 
   try {
-    const response = await fetch(gasUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    if (!response.ok) {
-      throw new Error(`同步失敗（${response.status}）`);
+    // 使用 sendBeacon API - 不受 CORS 限制
+    const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+    const success = navigator.sendBeacon(gasUrl, blob);
+    
+    if (success) {
+      setSyncStatus('✅ 資料已發送到 Google Sheets', 'success', `https://docs.google.com/spreadsheets/d/1HR3fNWMxcCELR4FGHuJjQakChB4pmjNQ4e1Pidgc8Ug/edit`);
+    } else {
+      setSyncStatus('⚠️ 發送失敗，請重試', 'error');
     }
-
-    const result = await response.json().catch(() => null);
-    setSyncStatus(result?.message || '資料已同步到 Google Sheets。', 'success', result?.sheetUrl);
   } catch (error) {
     setSyncStatus(`同步失敗：${error.message}`, 'error');
   }
